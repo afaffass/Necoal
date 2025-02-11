@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: pink;
+            background-image: url('https://www.pngrepo.com/png/209257/512/heart-pattern.png');
+            background-repeat: repeat;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .gif {
+            width: 250px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            font-size: 20px;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        .yes {
+            background-color: red;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.5);
+        }
+        .yes:hover {
+            background-color: darkred;
+        }
+        .no {
+            background-color: gray;
+            color: white;
+            box-shadow: 0px 4px 10px rgba(128, 128, 128, 0.5);
+        }
+        .no:hover {
+            background-color: darkgray;
+        }
+        h2 {
+            color: red;
+            font-size: 24px;
+            margin-top: 30px;
+        }
+        #myValentine {
+            color: black;
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 id="myValentine" style="display:none;">MY VALENTINE</h2>
+        <img id="gifImage" src="https://media.tenor.com/6HtaqfvrCX0AAAAj/love-squeeze.gif" class="gif" alt="Cute GIF">
+        <h1 id="valentineText">Will you be my Valentine?</h1>
+        <button class="btn yes" onclick="showLoveMessage()">Yes</button>
+        <button class="btn no" onclick="showNoGif()">No</button>
+    </div>
+    
+    <script>
+        let isYesPressed = false;
+        let sadMessages = [
+            "Ngek 💔",
+            "Do you not love me? 💔😢",
+            "Pleaseeeeeeeeee? 😭",
+            "Press 'Yes' Pleaseee 💔",
+            "You don't love me💔😭😭"
+        ];
+        let sadIndex = 0;
+
+        function showNoGif() {
+            if (!isYesPressed) {  // Only change the gif if Yes hasn't been pressed yet
+                document.getElementById('gifImage').src = "https://media.tenor.com/-zLlAH-CIr8AAAAj/piggy-mad.gif";
+                let noButton = document.querySelector('.no');
+                noButton.innerHTML = sadMessages[sadIndex];
+                sadIndex = (sadIndex + 1) % sadMessages.length;
+                noButton.style.backgroundColor = "gray";
+                noButton.style.color = "white";
+                noButton.style.fontSize = "22px";
+                let yesButton = document.querySelector('.yes');
+                let currentSize = parseInt(window.getComputedStyle(yesButton).fontSize);
+                yesButton.style.fontSize = (currentSize + 10) + 'px';
+            }
+        }
+
+        function showLoveMessage() {
+            isYesPressed = true;  // Mark Yes as pressed
+
+            document.getElementById('gifImage').src = "https://media.tenor.com/9QXD9DEzIpwAAAAj/cute-pig.gif";
+            document.getElementById('valentineText').style.display = 'none';
+            document.querySelector('.yes').style.display = 'none';
+            document.querySelector('.no').style.display = 'none';
+            document.getElementById('myValentine').style.display = 'block';
+
+            const message = document.createElement('h2');
+            message.innerHTML = `An official invitation to be my Valentine.<br><br>
+                                 Hey Bab,<br>
+                                 I know you've been working so hard and spending late nights studying. You deserve to be treated, 
+                                 and with Valentine’s Day coming up, I’d love to be your date.<br><br>
+                                 Let’s enjoy some time to celebrate the season of love. I can’t think of a better way to spend it 
+                                 than with you.<br><br>
+                                 I LOVE YOU.`;
+            document.body.appendChild(message);
+        }
+    </script>
+</body>
+</html>
